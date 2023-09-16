@@ -1,0 +1,15 @@
+name: setup-graphQL
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ secrets.MONGODB_URL }}"
