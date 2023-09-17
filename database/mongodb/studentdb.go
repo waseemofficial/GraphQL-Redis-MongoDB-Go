@@ -2,6 +2,7 @@ package mongodb
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -28,7 +29,7 @@ func Connect() *DB {
 		client: client,
 	}
 }
-func (db *DB) Save(input *model.NewStudent) *model.Student {
+func (db *DB) SaveStudent(input *model.NewStudent) *model.Student {
 	collection := db.client.Database("School").Collection("Students")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -56,29 +57,33 @@ func (db *DB) FindStudent(ID string) *model.Student {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	res := collection.FindOne(ctx, bson.M{"_id": ObjectID})
-
+	fmt.Println(res, ctx)
 	student := model.Student{}
 	res.Decode(&student)
+	fmt.Println(bson.M{"_id": ObjectID})
+	fmt.Println(&student)
 	return &student
 }
 
 func (db *DB) AllStudents() []*model.Student {
 	collection := db.client.Database("School").Collection("students")
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
 	defer cancel()
 	cur, err := collection.Find(ctx, bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer cur.Close(context.Background())
 	var students []*model.Student
 	for cur.Next(ctx) {
 		var student *model.Student
+		fmt.Println(student)
 		err := cur.Decode(&student)
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		students = append(students, student)
 	}
+
 	return students
 }

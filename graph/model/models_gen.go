@@ -26,7 +26,7 @@ type NewStaff struct {
 }
 
 type NewStudent struct {
-	StudentName string `json:"student_name"`
+	StudentName string `json:"student_name"   bson:"id"`
 	Gender      string `json:"gender"`
 	PhoneNo     int    `json:"phone_no"`
 	RollNo      string `json:"roll_no"`
@@ -40,7 +40,7 @@ type NewSubject struct {
 }
 
 type Student struct {
-	ID          string   `json:"id"  beson:"id"`
+	ID          string   `json:"id"`
 	StudentName string   `json:"student_name"`
 	Gender      string   `json:"gender"`
 	PhoneNo     int      `json:"phone_no"`
@@ -59,6 +59,7 @@ type Classes struct {
 }
 
 type Marks struct {
+	ID           string    `json:"id"`
 	Subject      *Subjects `json:"subject"`
 	MarksAcq     *int      `json:"marks_acq,omitempty"`
 	SubjectMarks *int      `json:"subject_marks,omitempty"`

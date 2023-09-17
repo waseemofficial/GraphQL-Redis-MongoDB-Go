@@ -10,14 +10,14 @@ type Student {
   class(id: String!): classes!
 }
 type parent {
-  id: ID!
+  id: String!
   name: String!
   phone_no: Int!
   job: String
   spous: [parent]
 }
 type classes {
-  id: ID!
+  id: String!
   class: String!
   section: String!
   subjects: [subjects!]
@@ -25,19 +25,20 @@ type classes {
   marks(id: String!): marks
 }
 type marks {
+  id: String!
   subject: subjects!
   marks_acq: Int
   subject_marks: Int
   percentage: Float
 }
 type staff {
-  id: ID!
+  id: String!
   staff_name: String!
   position: String!
   class_alloted: [classes!]!
 }
 type subjects {
-  id: ID!
+  id: String!
   subject: String!
   marks: Int
   class: String!
@@ -75,11 +76,11 @@ input NewParent {
   job: String
 }
 type Query {
-  parent(id: ID!): parent!
+  parent(id: String!): parent!
   student(id: String!): Student!
   students: [Student!]!
-  staff(id: ID!): staff!
-  class(id: ID!): classes!
+  staff(id: String!): staff!
+  class(id: String!): classes!
 }
 
 type Mutation {

@@ -16,7 +16,7 @@ var db = mongodb.Connect()
 
 // CreateStudent is the resolver for the createStudent field.
 func (r *mutationResolver) CreateStudent(ctx context.Context, input *model.NewStudent) (*model.Student, error) {
-	return db.Save(input), nil
+	return db.SaveStudent(input), nil
 }
 
 // CreateClass is the resolver for the createClass field.
@@ -26,7 +26,7 @@ func (r *mutationResolver) CreateClass(ctx context.Context, input *model.NewClas
 
 // CreateStaff is the resolver for the createStaff field.
 func (r *mutationResolver) CreateStaff(ctx context.Context, input *model.NewStaff) (*model.Staff, error) {
-	panic(fmt.Errorf("not implemented: CreateStaff - createStaff"))
+	return db.SaveStaff(input), nil
 }
 
 // CreateSubject is the resolver for the createSubject field.
@@ -36,7 +36,7 @@ func (r *mutationResolver) CreateSubject(ctx context.Context, input *model.NewSu
 
 // CreateParent is the resolver for the createParent field.
 func (r *mutationResolver) CreateParent(ctx context.Context, input *model.NewParent) (*model.Parent, error) {
-	panic(fmt.Errorf("not implemented: CreateParent - createParent"))
+	return db.SaveParent(input), nil
 }
 
 // CreateMarks is the resolver for the createMarks field.
@@ -46,7 +46,7 @@ func (r *mutationResolver) CreateMarks(ctx context.Context, input *model.NewMark
 
 // Parent is the resolver for the parent field.
 func (r *queryResolver) Parent(ctx context.Context, id string) (*model.Parent, error) {
-	panic(fmt.Errorf("not implemented: Parent - parent"))
+	return db.FindParent(id), nil
 }
 
 // Student is the resolver for the student field.
@@ -61,7 +61,7 @@ func (r *queryResolver) Students(ctx context.Context) ([]*model.Student, error) 
 
 // Staff is the resolver for the staff field.
 func (r *queryResolver) Staff(ctx context.Context, id string) (*model.Staff, error) {
-	panic(fmt.Errorf("not implemented: Staff - staff"))
+	return db.FindSaff(id), nil
 }
 
 // Class is the resolver for the class field.
