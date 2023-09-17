@@ -40,7 +40,7 @@ type NewSubject struct {
 }
 
 type Student struct {
-	ID          string   `json:"id"`
+	ID          string   `json:"id" bson:"id"`
 	StudentName string   `json:"student_name"`
 	Gender      string   `json:"gender"`
 	PhoneNo     int      `json:"phone_no"`

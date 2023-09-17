@@ -66,8 +66,8 @@ func (db *DB) FindStudent(ID string) *model.Student {
 }
 
 func (db *DB) AllStudents() []*model.Student {
-	collection := db.client.Database("School").Collection("students")
-	ctx, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	collection := db.client.Database("School").Collection("Students")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	cur, err := collection.Find(ctx, bson.D{})
 	if err != nil {
@@ -75,15 +75,12 @@ func (db *DB) AllStudents() []*model.Student {
 	}
 	var students []*model.Student
 	for cur.Next(ctx) {
-		var student *model.Student
-		fmt.Println(student)
-		err := cur.Decode(&student)
+		var stud *model.Student
+		err := cur.Decode(&stud)
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		students = append(students, student)
+		students = append(students, stud)
 	}
-
 	return students
 }
