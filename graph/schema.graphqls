@@ -1,0 +1,92 @@
+# https://gqlgen.com/getting-started/
+
+type Student {
+  id: String!
+  student_name: String!
+  gender: String!
+  phone_no: Int!
+  roll_no: String!
+  fee_payed: Boolean!
+  class(id: String!): classes!
+}
+type parent {
+  id: ID!
+  name: String!
+  phone_no: Int!
+  job: String
+  spous: [parent]
+}
+type classes {
+  id: ID!
+  class: String!
+  section: String!
+  subjects: [subjects!]
+  students_all: [Student!]
+  marks(id: String!): marks
+}
+type marks {
+  subject: subjects!
+  marks_acq: Int
+  subject_marks: Int
+  percentage: Float
+}
+type staff {
+  id: ID!
+  staff_name: String!
+  position: String!
+  class_alloted: [classes!]!
+}
+type subjects {
+  id: ID!
+  subject: String!
+  marks: Int
+  class: String!
+  student_all: [Student]
+}
+input NewStudent {
+  student_name: String!
+  gender: String!
+  phone_no: Int!
+  roll_no: String!
+  fee_payed: Boolean!
+}
+input NewSubject {
+  subject: String!
+  marks: Int
+  class: String!
+}
+input NewStaff {
+  staff_name: String!
+  position: String!
+}
+input NewClass {
+  class: String!
+  section: String!
+}
+input NewMarks {
+  subject_name: String!
+  marks_acq: Int
+  subject_marks: Int
+  percentage: Float
+}
+input NewParent {
+  name: String!
+  phone_no: Int!
+  job: String
+}
+type Query {
+  parent(id: ID!): parent!
+  student(id: String!): Student!
+  students: [Student!]!
+  staff(id: ID!): staff!
+  class(id: ID!): classes!
+}
+
+type Mutation {
+  createStudent(input: NewStudent): Student
+  createClass(input: NewClass): classes
+  createStaff(input: NewStaff): staff
+  createSubject(input: NewSubject): subjects
+  createParent(input: NewParent): parent
+  createMarks(input: NewMarks): marks
+}
