@@ -18,5 +18,4 @@ func ExampleClient() {
 	if err != nil {
 		panic(err)
 	}
-
 }

@@ -82,5 +82,6 @@ func (db *DB) AllStudents() []*model.Student {
 		}
 		students = append(students, stud)
 	}
+
 	return students
 }
